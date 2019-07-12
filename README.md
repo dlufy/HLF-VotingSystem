@@ -9,7 +9,47 @@ b.  error in "composer network start " due to incompatible version of composer a
  c. encoding error due to platform difference(wrong on unix files using windows platform) in files ==>solved using cmd :
  sed -i -e 's/\r$//' youFileName.sh
 
+long long fun(vector<long long> A){
+	
+    if(A.size() == 2)
+        return A[0]+A[1];
 
+//    cout<<"array get ";
+//    for(int i=0;i<A.size();i++)
+//        cout<<A[i]<<" ";
+//    cout<<endl;
+    int indx=-1;
+    long long ans=MOD;
+    for(int i=0;i<A.size();i++){
+            //cout<<A.size()<<" at "<<i<<" "<<(i+1)%A.size()<<endl;
+        long long tmp=A[i]+A[(i+1)%A.size()];
+        vector<long long> b;
+        if(i==A.size()-1){
+                b.push_back(A[0]+A[A.size()-1]);
+            for(int j=1;j<A.size()-1;j++){
+                b.push_back(A[j]);
+            }
+        }else{
+        for(int j=0;j<A.size();j++){
+            if(i==j){
+                b.push_back(A[j]+A[(j+1)%A.size()]);
+                j++;
+            }else
+                b.push_back(A[j]);
+        }
+//    for(int j=0;j<b.size();j++)
+//            cout<<b[j]<<" ";
+//    cout<<endl;
+        }
+        tmp+=fun(b);
+        if(ans>tmp){
+            indx=i;
+            ans=tmp;
+        }
+    }
+    //cout<<"indx "<<A[indx]<<" "<<A[(indx+1)%A.size()]<<endl;
+    return ans;
+}
 
 #include<bits/stdc++.h>
 using namespace std;
